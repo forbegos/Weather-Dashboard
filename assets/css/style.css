@@ -24,3 +24,21 @@
 .row-city {
   height: 200px;
 }
+
+#search-btn {
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 250px;
+}
+
+#search-form {
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+#formCityInput {
+  width: 250px;
+  padding: 5px;
+}
