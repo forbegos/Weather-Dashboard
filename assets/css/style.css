@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+}
+
+.jumbotron {
+  display: flex;
+  background-color: blue;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+
+.col {
+  border: blue solid 1px;
+}
+
+.forecast {
+  height: 200px;
+  width: 100px;
+  border: red solid 1px;
+}
+
+.row-city {
+  height: 200px;
+}
