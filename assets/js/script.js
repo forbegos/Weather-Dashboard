@@ -9,7 +9,8 @@ var city = {
 };
 var cities = new Array();
 
-function handleSearch() {
+function handleSearch(e) {
+  e.stopPropagation();
   $("li").remove();
   var input = $("#formCityInput").val();
   cities.push(input);
@@ -60,16 +61,15 @@ function postResults(data, input) {
   $("#main-output").append("<li> <p>UV Index: " + city.uVIndex + "</p></li>");
   $("li").addClass("list-group-item");
 
-  // searchButtons();
+  searchButtons();
 }
-// function searchButtons() {
-// }
+function searchButtons() {
+  var idClicked = "";
+  $("button").click(function (e) {
+    idClicked = e.target.id;
+    searchApi(idClicked);
+  });
+  // $("li").remove();
+}
 
 $("#search-btn").on("click", handleSearch);
-
-// $("button").click(function (e) {
-//   e.preventDefault();
-//   var idClicked = e.target.id;
-//   searchApi(idClicked);
-//   $("li").remove();
-// });
