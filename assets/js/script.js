@@ -1,17 +1,9 @@
 // - declarations -
 // var input = "";
-var city = {
-  name: "",
-  temp: "",
-  wind: "",
-  humidty: "",
-  uVIndex: 0.0,
-};
+
 var cities = new Array();
 
-function handleSearch(e) {
-  e.stopPropagation();
-  $("li").remove();
+function handleSearch() {
   var input = $("#formCityInput").val();
   cities.push(input);
 
@@ -27,7 +19,6 @@ function handleSearch(e) {
 }
 
 function searchApi(input) {
-  $("li").remove();
   var weatherURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     input +
@@ -45,13 +36,15 @@ function searchApi(input) {
 
 function postResults(data, input) {
   var wDate = new Date(data.dt * 1000).toLocaleDateString("en-US");
-  city.name = input;
-  city.temp = data.main.temp;
-  city.wind = data.wind.speed;
-  city.humidity = data.main.humidity;
-  city.uVIndex = "UVINDEX";
-  // console.log(city);
+  var city = {
+    name: input,
+    temp: data.main.temp,
+    wind: data.wind.speed,
+    humidity: data.main.humidity,
+    uVIndex: 0.0,
+  };
 
+  $(".list-group-item").remove();
   $("#main-output").append(
     "<li> <h2>" + city.name + " (" + wDate + ")" + "</h2></li>"
   );
@@ -64,12 +57,11 @@ function postResults(data, input) {
   searchButtons();
 }
 function searchButtons() {
-  var idClicked = "";
   $("button").click(function (e) {
-    idClicked = e.target.id;
+    var idClicked = e.target.id;
     searchApi(idClicked);
   });
-  // $("li").remove();
+  $("li").remove;
 }
 
-$("#search-btn").on("click", handleSearch);
+$("#search-btn").click(handleSearch);
