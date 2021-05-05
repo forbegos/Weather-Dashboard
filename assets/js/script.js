@@ -1,3 +1,4 @@
+// Initial read from local storage -------------------------
 var cities = JSON.parse(localStorage.getItem("cities"));
 console.log(cities);
 if (cities != null) {
@@ -9,19 +10,25 @@ if (cities != null) {
 } else {
   cities = [];
 }
+// Startup city placeholder -----------
+getWeatherData("Denver");
 
+// Main event handler function - handle main search -----------
 function handleSearch() {
   var input = $("#formCityInput").val();
   cities.push(input);
   getWeatherData(input);
 }
 
+// Get weather data for input city and display it ---------------------------------
 function getWeatherData(input) {
+  // Declare URL for basic weather data from open weather map -------------
   var weatherURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     input +
     "&units=imperial&appid=7c08f7afcc6d36b67deb43725fa6e363";
 
+  // fetch the first api from open weaher map with basic weather data and post to screen----------
   fetch(weatherURL)
     .then(function (response) {
       return response.json();
@@ -42,6 +49,8 @@ function getWeatherData(input) {
       $("#main-output").append(
         "<li> <p>Humidity: " + data.main.humidity + " %</p></li>"
       );
+      // Declare second URL for specific weather data (weather forecast and uv index information)
+      // from open weather map -------------
 
       var weather2URL =
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -49,6 +58,8 @@ function getWeatherData(input) {
         "&lon=" +
         data.coord.lon +
         "&units=imperial&appid=7c08f7afcc6d36b67deb43725fa6e363";
+
+      // fetch the second api from open weaher map with specific weather data and post to screen----------
 
       fetch(weather2URL)
         .then(function (response) {
@@ -73,7 +84,7 @@ function getWeatherData(input) {
           );
           $("li").addClass("list-group-item");
 
-          //get forecast here--------------
+          //post forecast (5 Day) weather data here------------------------------
           for (var i = 0; i < 5; i++) {
             var wDate = new Date(data2.daily[i].dt * 1000).toLocaleDateString(
               "en-US"
@@ -108,20 +119,25 @@ function getWeatherData(input) {
           }
         });
     });
-
+  // call create buttons function to generate search history button list ----------
   createButtons(cities);
+  // save current array of cities to local storage --------------
   localStorage.setItem("cities", JSON.stringify(cities));
 }
 
+// Create history button lists ------------------
 function createButtons(cities) {
   $("#search-history").append(
     "<button id = 'historybutton'>" + cities[cities.length - 1] + "</button>"
   );
 }
 
-$("#historybutton").click(function () {
-  console.log("hi!");
-  getWeatherData($("#historybutton").val());
-});
+// Event listner for search history buttons ------------
 
+// $("#historybutton").click(function () {
+//   console.log("hi!");
+//   getWeatherData($("#historybutton").val());
+// });
+
+// Main event handler -----------------------
 $("#search").click(handleSearch);
