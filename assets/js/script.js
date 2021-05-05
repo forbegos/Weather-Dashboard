@@ -44,8 +44,20 @@ function getWeatherData(input) {
         })
         .then(function (data2) {
           console.log(data2);
+          if (data2.current.uvi > 8) {
+            spanClass = "red";
+          } else if (data2.current.uvi < 7 && data2.current.uvi > 3) {
+            spanClass = "yellow";
+          } else {
+            spanClass = "green";
+          }
+
           $("#main-output").append(
-            "<li><p id = 'uvindex'>UV Index: " + data2.current.uvi + "</p></li>"
+            "<li><p id = 'uvindex'>UV Index: <span class = " +
+              spanClass +
+              ">" +
+              data2.current.uvi +
+              "</span></p></li>"
           );
           $("li").addClass("list-group-item");
 
@@ -92,5 +104,10 @@ function createButtons(input) {
     "<button id = 'historybutton'>" + input + "</button>"
   );
 }
+
+$("#historybutton").click(function () {
+  console.log("hi!");
+  getWeatherData($("#historybutton").val());
+});
 
 $("#search").click(handleSearch);
