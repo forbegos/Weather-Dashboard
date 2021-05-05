@@ -1,6 +1,8 @@
+var cities = [];
+
 function handleSearch() {
   var input = $("#formCityInput").val();
-  console.log(input);
+  cities.push(input);
   getWeatherData(input);
 }
 
@@ -96,12 +98,13 @@ function getWeatherData(input) {
           }
         });
     });
-  createButtons(input);
+
+  createButtons(cities);
 }
 
-function createButtons(input) {
+function createButtons(cities) {
   $("#search-history").append(
-    "<button id = 'historybutton'>" + input + "</button>"
+    "<button id = 'historybutton'>" + cities[cities.length - 1] + "</button>"
   );
 }
 
