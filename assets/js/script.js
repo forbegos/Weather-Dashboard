@@ -22,13 +22,13 @@ function getWeatherData(input) {
         "<li> <h2>" + data.name + " (" + wDate + ")" + "</h2></li>"
       );
       $("#main-output").append(
-        "<li> <p>Temp: " + data.main.temp + "°F</p></li>"
+        "<li> <p>Temp: " + data.main.temp + " °F</p></li>"
       );
       $("#main-output").append(
-        "<li> <p>Wind: " + data.wind.speed + "</p></li>"
+        "<li> <p>Wind: " + data.wind.speed + " MPH</p></li>"
       );
       $("#main-output").append(
-        "<li> <p>Humidity: " + data.main.humidity + "</p></li>"
+        "<li> <p>Humidity: " + data.main.humidity + " %</p></li>"
       );
 
       var weather2URL =
@@ -36,7 +36,7 @@ function getWeatherData(input) {
         data.coord.lat +
         "&lon=" +
         data.coord.lon +
-        "&appid=7c08f7afcc6d36b67deb43725fa6e363";
+        "&units=imperial&appid=7c08f7afcc6d36b67deb43725fa6e363";
 
       fetch(weather2URL)
         .then(function (response) {
@@ -50,6 +50,38 @@ function getWeatherData(input) {
           $("li").addClass("list-group-item");
 
           //get forecast here--------------
+          for (var i = 0; i < 5; i++) {
+            var wDate = new Date(data2.daily[i].dt * 1000).toLocaleDateString(
+              "en-US"
+            );
+
+            $("#forecast" + i).append(
+              "<li class = 'list-group-item'><h3>" + wDate + "</h3></li>"
+            );
+            var icon =
+              "http://openweathermap.org/img/w/" +
+              data2.daily[i].weather[0].icon +
+              ".png";
+
+            $("#forecast" + i).append(
+              "<li class = 'list-group-item'><img src=" + icon + ">" + "</li>"
+            );
+            $("#forecast" + i).append(
+              "<li class = 'list-group-item'><p>Temp: " +
+                data2.daily[i].temp.day +
+                " °F</p></li>"
+            );
+            $("#forecast" + i).append(
+              "<li class = 'list-group-item'><p>Wind: " +
+                data2.daily[i].wind_speed +
+                " MPH</p></li>"
+            );
+            $("#forecast" + i).append(
+              "<li class = 'list-group-item'><p>Humidity: " +
+                data2.daily[i].humidity +
+                " %</p></li>"
+            );
+          }
         });
     });
   createButtons(input);
