@@ -12,13 +12,13 @@ if (cities != null) {
     );
   }
 }
-
+var input = "";
 // Startup city placeholder -----------
 getWeatherData("Denver");
 
 // Main event handler function - handle main search -----------
 function handleSearch() {
-  var input = $("#formCityInput").val();
+  input = $("#formCityInput").val();
   if (cities == null) {
     cities = [input];
   } else {
@@ -135,7 +135,7 @@ function getWeatherData(input) {
 
 // Create history button lists ------------------
 function createButtons(cities) {
-  if (cities != null) {
+  if (cities != null && input != "") {
     $("#search-history").append(
       "<button id = 'historybutton'>" + cities[cities.length - 1] + "</button>"
     );
