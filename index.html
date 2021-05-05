@@ -29,21 +29,53 @@
             placeholder="San Diego"
           />
           <br />
-          <button type="button" class="btn btn-primary" id="search-btn">
+          <button type="button" class="btn btn-primary" id="search">
             Search
           </button>
-          <div class="list-group" id="search-history"></div>
+          <ul class="list-group" id="search-history"></ul>
         </div>
         <div class="col col-md-9 col-lg-9" id="result">
           <div class="row row-city">
             <ul class="list-group" id="main-output"></ul>
           </div>
-          <div class="row">
-            <div class="col forecast"><p>col 2 row 2 col 1</p></div>
-            <div class="col forecast"><p>col 2 row 2 col 2</p></div>
-            <div class="col forecast"><p>col 2 row 2 col 3</p></div>
-            <div class="col forecast"><p>col 2 row 2 col 4</p></div>
-            <div class="col forecast"><p>col 2 row 2 col 5</p></div>
+
+          <h3>5-Day Forecast:</h3>
+          <div class="row row-forecast">
+            <div class="col forecast" id="forecastbox">
+              <div class="card" style="width: 10rem">
+                <div class="card-body">
+                  <ul class="list-group" id="forecast0"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="col forecast" id="forecastbox">
+              <div class="card" style="width: 10rem">
+                <div class="card-body">
+                  <ul class="list-group" id="forecast1"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="col forecast" id="forecastbox">
+              <div class="card" style="width: 10rem">
+                <div class="card-body">
+                  <ul class="list-group" id="forecast2"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="col forecast" id="forecastbox">
+              <div class="card" style="width: 10rem">
+                <div class="card-body">
+                  <ul class="list-group" id="forecast3"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="col forecast" id="forecastbox">
+              <div class="card" style="width: 10rem">
+                <div class="card-body">
+                  <ul class="list-group" id="forecast4"></ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
