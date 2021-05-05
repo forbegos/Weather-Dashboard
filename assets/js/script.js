@@ -1,4 +1,14 @@
-var cities = [];
+var cities = JSON.parse(localStorage.getItem("cities"));
+console.log(cities);
+if (cities != null) {
+  for (var i = 0; i < cities.length; i++) {
+    $("#search-history").append(
+      "<button id = 'historybutton'>" + cities[i] + "</button>"
+    );
+  }
+} else {
+  cities = [];
+}
 
 function handleSearch() {
   var input = $("#formCityInput").val();
@@ -100,6 +110,7 @@ function getWeatherData(input) {
     });
 
   createButtons(cities);
+  localStorage.setItem("cities", JSON.stringify(cities));
 }
 
 function createButtons(cities) {
