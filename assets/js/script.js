@@ -1,16 +1,16 @@
 // Initial read from local storage -------------------------
-var cities = JSON.parse(localStorage.getItem("cities"));
 
 // If local storage is not empty, populate history search list buttons -----------
+var cities = JSON.parse(localStorage.getItem("cities"));
 console.log(cities);
+
 if (cities != null) {
+  $("#search-history").empty();
   for (var i = 0; i < cities.length; i++) {
     $("#search-history").append(
       "<button id = 'historybutton'>" + cities[i] + "</button>"
     );
   }
-} else {
-  cities = [];
 }
 
 // Startup city placeholder -----------
@@ -19,7 +19,12 @@ getWeatherData("Denver");
 // Main event handler function - handle main search -----------
 function handleSearch() {
   var input = $("#formCityInput").val();
-  cities.push(input);
+  if (cities == null) {
+    cities = [input];
+  } else {
+    cities.push(input);
+  }
+  console.log(cities);
   getWeatherData(input);
 }
 
@@ -130,9 +135,11 @@ function getWeatherData(input) {
 
 // Create history button lists ------------------
 function createButtons(cities) {
-  $("#search-history").append(
-    "<button id = 'historybutton'>" + cities[cities.length - 1] + "</button>"
-  );
+  if (cities != null) {
+    $("#search-history").append(
+      "<button id = 'historybutton'>" + cities[cities.length - 1] + "</button>"
+    );
+  }
 }
 
 // Event listner for search history buttons ------------
