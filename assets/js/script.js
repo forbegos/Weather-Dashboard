@@ -1,5 +1,7 @@
 // Initial read from local storage -------------------------
 var cities = JSON.parse(localStorage.getItem("cities"));
+
+// If local storage is not empty, populate history search list buttons -----------
 console.log(cities);
 if (cities != null) {
   for (var i = 0; i < cities.length; i++) {
@@ -10,6 +12,7 @@ if (cities != null) {
 } else {
   cities = [];
 }
+
 // Startup city placeholder -----------
 getWeatherData("Denver");
 
